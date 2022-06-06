@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <title>Главная страница</title>
+</head>
+<body class="font-sans bg-gray-200">
+    <div class="max-w-xl mx-auto py-12 sm:px-6 lg:px-8">
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Курсы валют</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">Тестовое задание</p>
+            </div>
+            <div class="border-t border-gray-200">
+                <dl>
+                    <form action="#" th:action="@{/currency/compare}" method="post" th:object="${code}">
+                        <div class="bg-gray-50 px-4 py-5 sm:grid  sm:grid-cols-2 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+
+                                <select name="code">
+                                    <th:block th:each="currency : ${currencies}">
+                                        <th:block th:if="${currency.key} == ${code}" >
+                                            <option th:value="${currency.key}" th:text="${currency.value}" selected></option>
+                                        </th:block>
+                                        <th:block th:else="${currency.key} == ${code}" >
+                                            <option th:value="${currency.key}" th:text="${currency.value}"></option>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </dt>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-5 sm:grid  sm:grid-cols-2 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                                <button type="submit" class="px-4 py-2 border border-gray-300 font-medium text-gray-700 bg-white">
+                                    Выполнить
+                                </button>
+                            </dt>
+                        </div>
+                        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-1">
+                            <dt class="text-sm font-medium text-gray-500">
+                                <div th:if="${success == true}">
+                                    <iframe width="500" height="500" th:src="${gif}"></iframe>
+                                </div>
+                            </dt>
+                        </div>
+                    </form>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

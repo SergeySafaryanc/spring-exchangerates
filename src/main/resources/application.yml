@@ -1,0 +1,35 @@
+server:
+  port: 9092
+
+openexchangerate:
+  url: https://openexchangerates.org/api/
+  appId: dfabc8028fa1443ba6f3229a9382bcc3
+
+  currencies:
+    path: currencies.json
+  latest:
+    path: latest.json?app_id=${openexchangerate.appId}
+  history:
+    path: historical/{date}.json?app_id=${openexchangerate.appId}
+
+giphy:
+  url: https://api.giphy.com/v1/gifs/
+  apiKey: COD9mFVQgbVuKHIGVgk0wVKaFzA48cD5
+  path: search?api_key=${giphy.apiKey}&q={query}
+
+#springdoc:
+#  api-docs:
+#    path: /docs
+#    enabled: true
+#  swagger-ui:
+#    path: /swagger-ui
+#    show-extensions: true
+#    show-common-extensions: true
+
+logging:
+  file:
+    name: ./log/app.log
+  level:
+    "web": warn
+    "root": warn
+    "ru.alfabank.exchangerates": info
